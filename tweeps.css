@@ -108,11 +108,9 @@ h1 {
   position: relative;
   z-index: 1;
   background-color: white;
-  -webkit-box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.08);
-  -webkit-border-bottom-left-radius: 5px;
-  -moz-border-radius-bottomleft: 5px;
-  -webkit-border-bottom-right-radius: 5px;
-  -moz-border-radius-bottomright: 5px; }
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.08);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px; }
   #content p.upcoming {
     font-size: 16px;
     line-height: 1;
@@ -145,9 +143,8 @@ h1 {
       padding: 15px 20px;
       width: 575px;
       background-color: #f1f4f3;
-      -webkit-box-shadow: 3px 3px 0 #ebebeb;
-      -webkit-border-radius: 3px;
-      -moz-border-radius: 3px;
+      box-shadow: 3px 3px 0 #ebebeb;
+      border-radius: 3px;
       border-radius: 3px; }
       #content > header p strong {
         font-family: "proxima-nova-1", "proxima-nova-2", "Proxima Nova", Gotham, "Helvetica Neue", Helvetica, sans-serif;
@@ -200,10 +197,8 @@ h1 {
     background-color: #66b82f;
     letter-spacing: 1px;
     font-weight: 600;
-    -webkit-border-top-left-radius: 15px;
-    -moz-border-radius-topleft: 15px;
-    -webkit-border-bottom-left-radius: 15px;
-    -moz-border-radius-bottomleft: 15px; }
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px; }
     #events h2:before {
       content: '•';
       font-size: 40px;
@@ -259,11 +254,12 @@ h1 {
   text-indent: -1000px;
   background: transparent url(smiley.png) no-repeat 0 0;
   z-index: 4;
-  -webkit-user-select: none; }
+  user-select: none;
+  cursor: pointer; }
 
 #bunch-o-bananas {
   display: none;
-  -webkit-mask-box-image: url(hole-mask.png);
+  mask: url(hole-mask.png);
   background: transparent url(sprites.png) no-repeat 0 -1300px;
   text-indent: -1000px;
   z-index: 3;
@@ -307,7 +303,7 @@ h1 {
       left: 50px;
       bottom: -5px; }
 
-@-webkit-keyframes drop-it {
+@keyframes drop-it {
   0% {
     bottom: 100px;
     left: 44px; }
@@ -316,7 +312,7 @@ h1 {
     bottom: 0;
     left: 84px; } }
 
-@-webkit-keyframes dance-dance-dance {
+@keyframes dance-dance-dance {
   0% {
     left: 84px; }
 
@@ -329,7 +325,7 @@ h1 {
   100% {
     left: 84px; } }
 
-@-webkit-keyframes jump-around {
+@keyframes jump-around {
   0% {
     bottom: 0; }
 
@@ -347,15 +343,15 @@ h1 {
 
 img.escapee {
   position: absolute;
-  bottom: 0px;
+  bottom: 100px;
   left: 44px;
   opacity: 1;
-  -webkit-user-select: none;
+  user-select: none;
   z-index: 6; }
   img.escapee.bouncin {
     cursor: pointer;
-    -webkit-animation-name: drop-it, dance-dance-dance, jump-around;
-    -webkit-animation-duration: 350ms, 10s, 300ms;
-    -webkit-animation-iteration-count: 1, infinite, infinite;
-    -webkit-animation-timing-function: linear, linear, ease-in-out;
-    -webkit-animation-delay: 0, 250ms, 300ms; }
+    animation-name: drop-it, dance-dance-dance, jump-around;
+    animation-duration: 350ms, 10s, 300ms;
+    animation-iteration-count: 1, infinite, infinite;
+    animation-timing-function: linear, linear, ease-in-out;
+    animation-delay: 0ms, 250ms, 300ms; }
