@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!--
+   _
+  //\
+  V  \
+   \  \_         find the banana
+    \,'.`-.         you shall.
+     |\ `. `.
+     ( \  `. `-.                        _,.-:\
+      \ \   `.  `-._             __..--' ,-';/
+       \ `.   `-.   `-..___..---'   _.--' ,'/
+        `. `.    `-._        __..--'    ,' /
+          `. `-_     ``--..''       _.-' ,'
+            `-_ `-.___        __,--'   ,'
+               `-.__  `----"""    __.-'
+                    `--..____..--'
+-->
+<html lang='en-au'>
+  <head>
+    <meta charset='utf-8' />
+    <meta content='Tim Lucas' name='author' />
+    <title>Tweeps</title>
+    <link href='http://toolmantim.com/' rel='author' />
+    <link href='tweeps.css' rel='stylesheet' />
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="http://use.typekit.com/ojh4vnz.js"></script>
+    <meta name="viewport" content="width=925" />
+    <script>try{Typekit.load();}catch(e){}</script>
+  </head>
+  <body>
+    <h1>Tweeps</h1>
+    <div id="smiley">Smile!</div>
+    <section id="content">
+      <p class="upcoming"><a href="http://atmedia.tweeps.webdirections.org/">Upcoming event: <strong>@media: June 8–11 2010</strong></a></p>
+      <header>
+        <p>
+          <strong>Tweeps</strong> uses the power of the intertubes and <a href="http://twitter.com/jointweeps/lists">Twitter lists</a> to help you find other attendees and track what's being said at #wdx events.
+        </p>
+      </header>
+      <section id="events">
+        <h2>Events</h2>
+        <ol>
+          <li>
+            <h3><a href="http://wds10.tweeps.webdirections.org/">Web Directions South 2010</a></h3>
+            <p class="description">Featuring leading web practitioners from across the world, bringing you the freshest technologies, techniques and know-how in web design and development, as well as the big picture, the latest from the W3C, plus numerous networking and social opportunities.</p>
+            <aside>
+              <p class="date">Oct 12–16, 2010</p>
+            </aside>
+          </li>
+          <li>
+            <h3><a href="http://atmedia.tweeps.webdirections.org/">Web Directions @media 2010</a></h3>
+            <p class="description">Bringing together world experts in design and development, over 2 full days of conference and 2 full days of workshops, Web Directions @media continues the tradition and stays the professional and networking event of the year for the web industry.</p>
+            <aside>
+              <p class="date">Jun 8–11, 2010</p>
+            </aside>
+          </li>
+          <li>
+            <h3><a href="http://wds09.tweeps.webdirections.org/">Web Directions South 2009</a></h3>
+            <p class="description">Web Direction South 2009 was held at Sydney Convention and Exhibition Centre, October 8 and 9 2009.</p>
+            <aside>
+              <p class="date">Oct 8–9, 2009</p>
+            </aside>
+          </li>
+        </ol>
+      </section>
+      <footer>
+        <p class="made-by"><a href="http://agencyrainford.com/">Made in Australia.</a></p>
+        <p class="web-dir"><a href="http://webdirections.org/">Brought to you by Web Directions.</a></p>
+      </footer>
+    </section>
+    <div id="bunch-o-bananas">
+      <img class="banana-1" src="pjb-banana.gif" width="33" height="35" alt="It’s Peanut Butter Jelly Time!" />
+      <img class="banana-2" src="pjb-banana.gif" width="33" height="35" alt="It’s Peanut Butter Jelly Time!" />
+      <img class="banana-3" src="pjb-banana.gif" width="33" height="35" alt="It’s Peanut Butter Jelly Time!" />
+      <img class="banana-4" src="pjb-banana.gif" width="33" height="35" alt="It’s Peanut Butter Jelly Time!" />
+      <img class="banana-5" src="pjb-banana.gif" width="33" height="35" alt="It’s Peanut Butter Jelly Time!" />
+      <img class="banana-6" src="pjb-banana.gif" width="33" height="35" alt="It’s Peanut Butter Jelly Time!" />
+      <img class="banana-7" src="pjb-banana.gif" width="33" height="35" alt="It’s Peanut Butter Jelly Time!" />
+      <img class="banana-8" src="pjb-banana.gif" width="33" height="35" alt="It’s Peanut Butter Jelly Time!" />
+      <img class="banana-9" src="pjb-banana.gif" width="33" height="35" alt="It’s Peanut Butter Jelly Time!" />
+      <img class="banana-10" src="pjb-banana.gif" width="33" height="35" alt="It’s Peanut Butter Jelly Time!" />
+    </div>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+    <script>
+      $(function() {
+        
+        $("#events li").each(function() {
+          var event = $(this);
+          $.getJSON(event.find("h3 a").attr("href") + "stats.json?callback=?", function(stats) {
+            statsList(stats).appendTo(event.find("aside"));
+          });
+        });
+        
+        function statsList(stats) {
+          return $("<ul/>")
+            .append(statsItem("tweeps", stats.tweeps))
+            .append(statsItem("tweets", stats.tweets))
+          
+          function statsItem(name, number) {
+            return $("<li><strong>" + formatWithSeparators(number) + "</strong> " + name + "</li>");
+          }
+          function formatWithSeparators(number) {
+            return number.toString().replace(/(\d{1,3})(?=(\d{3})+(?!\d))/g, '$1,');
+          }
+        }
+        
+      });
+    </script>
+    <script>
+      $(function() {
+        
+        // Sorry non-webkitters!
+        if (!navigator.userAgent.match(/webkit/i)) return;
+        
+        function randomBetween(min, max) { return min + (Math.random() * (max - min)); }
+        
+        (function() {
+          var smiley = $("#smiley"),
+              bunch = $("#bunch-o-bananas"),
+              open = false,
+              animationInterval,
+              frame = 0,
+              totalFrames = 10,
+              spriteHeight = 180,
+              frameRate = 30,
+              bananaImage = "pjb-banana.gif",
+              squashedBananaImage = "pjb-squashed.gif";
+          
+          scheduleBananaRelease();
+          preload();
+
+          smiley.click(function() { open ? closeHatch() : openHatch(); });
+
+          function openHatch() {
+            open = true; bunch.show();
+            animateHatch(function() { updateSprite(); frame != totalFrames ? frame++ : stopAnimation(); });
+          }
+          function closeHatch() {
+            open = false;
+            animateHatch(function() { updateSprite(); frame != 0 ? frame-- : stopAnimation(); });
+          }
+          function animateHatch(fn) {
+            stopAnimation(); animationInterval = setInterval(fn, frameRate);
+          }
+          function stopAnimation() {
+            clearInterval(animationInterval);
+          }
+          function updateSprite() {
+            smiley.css({backgroundPosition:"0 -" + frame * spriteHeight + "px"});
+          }
+          function scheduleBananaRelease() {
+            setTimeout(function() { if (open) releaseBanana(); scheduleBananaRelease(); }, randomBetween(1000, 6000));
+          }
+          function releaseBanana() {
+            $('<img class="escapee bouncin" width="33" height="35" />')
+              .attr("src", bananaImage)
+              .click(function() { squashBanana($(this)); $(this).unbind("click"); })
+              .appendTo("#content header");
+          }
+          function squashBanana(banana) {
+            var slide = randomBetween(30,100);
+            banana
+              .css(banana.position()) // lock in current position
+              .removeClass("bouncin")
+              .attr("src", squashedBananaImage)
+              .animate({top:"+="+slide}, (slide / 30) * 1000); // 30px/s drop
+          }
+          function preload() {
+            $("<img>").attr("src", squashedBananaImage);
+          }
+          
+        })();
+
+      });
+    </script>
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-8671638-4']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
